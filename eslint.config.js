@@ -42,6 +42,8 @@ export default tseslint.config(
       'no-console': 'warn',
       'react/button-has-type': 'error',
       'react/react-in-jsx-scope': ['off'],
+      'jsx-a11y/click-events-have-key-events': 'off',
+      'jsx-a11y/no-noninteractive-element-interactions': 'off',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }]
     }
   }

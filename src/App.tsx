@@ -1,5 +1,15 @@
-function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
-}
+import { BoardGame } from './components/BoardGame';
+import { Navbar } from './components/Navbar';
 
-export default App;
+const App = () => {
+  return (
+    <>
+      <Navbar />
+      <section className="flex justify-center mx-auto max-w-[1000px] p-4 mt-16">
+        <BoardGame />
+      </section>
+    </>
+  );
+};
+
+export { App };
