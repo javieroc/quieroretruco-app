@@ -1,4 +1,5 @@
 export type Player = {
+  id: string;
   name: string;
   image: string;
   position: number;
@@ -6,38 +7,42 @@ export type Player = {
   isBoton: boolean;
 };
 
-type Status = 'waiting' | 'playing' | 'finished';
+export type Status = 'waiting' | 'playing' | 'finished';
+
+export type Spell =
+  | 'envido'
+  | 'real envido'
+  | 'falta envido'
+  | 'truco'
+  | 're truco'
+  | 'vale cuatro';
+
+export interface Move {
+  playerId: string;
+  card: string | null;
+  spell?: Spell;
+}
 
 export interface Match {
   id: string;
-  players: Player[];
+  players: ReadonlyArray<Player>;
   status: Status;
-  boton: Player;
   currentGame: Game;
   gameHistory: string[];
-}
-
-type Round = 'round1' | 'round2' | 'round3';
-
-interface Move {
-  player: Player;
-  card: string;
+  totalScore: {
+    us: number;
+    they: number;
+  };
 }
 
 export interface Game {
-  currentRound: Round;
-  round1: {
-    handsHistory: Move[];
-    won: Player | undefined;
-  };
-  round2: {
-    handsHistory: Move[];
-    won: Player | undefined;
-  };
-  round3: {
-    handsHistory: Move[];
-    won: Player | undefined;
-  };
+  id: string;
+  botomIndex: number;
+  currentRound: 1 | 2 | 3;
+  rounds: Array<{
+    history: Move[];
+    won?: string;
+  }>;
   score: {
     us: number;
     they: number;
