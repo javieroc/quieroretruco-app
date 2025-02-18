@@ -4,7 +4,6 @@ export type Player = {
   image: string;
   position: number;
   hand: string[];
-  isBoton: boolean;
 };
 
 export type Status = 'waiting' | 'playing' | 'finished';

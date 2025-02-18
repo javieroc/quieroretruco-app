@@ -65,7 +65,6 @@ const ControlButtons: FC = () => {
             id: faker.string.uuid(),
             hand: [],
             image: avatars[totalPlayers + 1],
-            isBoton: totalPlayers + 1 === 1,
             name: faker.person.firstName(),
             position: totalPlayers + 1,
           })

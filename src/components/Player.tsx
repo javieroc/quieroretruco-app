@@ -5,10 +5,11 @@ import { PlayCard } from './PlayCard';
 
 interface PlayerProps {
   player: PlayerType;
+  isBoton: boolean;
   totalPlayers: number;
 }
 
-const Player: FC<PlayerProps> = ({ player, totalPlayers }) => {
+const Player: FC<PlayerProps> = ({ player, isBoton, totalPlayers }) => {
   const positionsCss: Record<string, string> = {
     '1-2': 'bottom-0 left-[50%] transform translate-x-[-50%] translate-y-[50%]',
     '1-4': 'bottom-0 left-[50%] transform translate-x-[-50%] translate-y-[50%]',
@@ -33,7 +34,7 @@ const Player: FC<PlayerProps> = ({ player, totalPlayers }) => {
           alt="Player avatar"
           className="w-14 h-14 rounded-full border-4 border-b-gray-600"
         />
-        {player.isBoton && (
+        {isBoton && (
           <img src={Star} className="w-6 h-6 absolute top-9 right-7" alt="Boton player" />
         )}
         <div className="flex gap-1">
