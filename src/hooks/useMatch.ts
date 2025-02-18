@@ -8,11 +8,13 @@ import {
   addMoveAtom,
   updateScoreAtom,
   startGameAtom,
+  createNewMatchAtom,
 } from '../atoms';
 import { Player, Status, Move } from '../types';
 
 export const useMatch = () => {
   const [match] = useAtom(matchAtom);
+  const [, createNewMatch] = useAtom(createNewMatchAtom);
   const [, addPlayer] = useAtom(addPlayerAtom);
   const [, removePlayer] = useAtom(removePlayerAtom);
   const [, updateMatchStatus] = useAtom(updateMatchStatusAtom);
@@ -30,5 +32,6 @@ export const useMatch = () => {
     addMove: (move: Move) => addMove(move),
     updateScore: (score: { us: number; they: number }) => updateScore(score),
     startGame: () => startGame(),
+    createNewMatch: () => createNewMatch(),
   };
 };

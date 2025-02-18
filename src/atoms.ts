@@ -1,26 +1,31 @@
 import { atom } from 'jotai';
+import { faker } from '@faker-js/faker';
 import { Match, Player, Status, Move, Game } from './types';
 import { generateHands } from './utils';
 
-export const matchAtom = atom<Match | null>({
-  id: '',
-  players: [],
-  status: 'waiting',
-  currentGame: {
-    id: '',
-    botomIndex: 1,
-    currentRound: 1,
-    rounds: [],
-    score: {
+export const matchAtom = atom<Match | null>(null);
+
+export const createNewMatchAtom = atom(null, (_, set) => {
+  set(matchAtom, {
+    id: faker.string.uuid(),
+    players: [],
+    status: 'waiting',
+    currentGame: {
+      id: '',
+      botomIndex: 1,
+      currentRound: 1,
+      rounds: [],
+      score: {
+        us: 0,
+        they: 0,
+      },
+    },
+    gameHistory: [],
+    totalScore: {
       us: 0,
       they: 0,
     },
-  },
-  gameHistory: [],
-  totalScore: {
-    us: 0,
-    they: 0,
-  },
+  });
 });
 
 export const addPlayerAtom = atom(null, (get, set, newPlayer: Player) => {
@@ -140,7 +145,7 @@ export const startGameAtom = atom(null, (get, set) => {
   }));
 
   const newGame: Game = {
-    id: `game-${match.gameHistory.length + 1}`,
+    id: faker.string.uuid(),
     botomIndex: botonIndex,
     currentRound: 1,
     rounds: [],
