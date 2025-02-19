@@ -4,6 +4,7 @@ export type Player = {
   image: string;
   position: number;
   hand: string[];
+  team?: 'us' | 'they';
 };
 
 export type Status = 'waiting' | 'playing' | 'finished';
@@ -36,7 +37,7 @@ export interface Match {
 
 export interface Game {
   id: string;
-  botomIndex: number;
+  botomIndex: number | null;
   currentRound: 1 | 2 | 3;
   rounds: Array<{
     history: Move[];

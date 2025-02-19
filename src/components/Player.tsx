@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Player as PlayerType } from '../types';
 import Star from '../assets/star.png';
 import { PlayCard } from './PlayCard';
+import clsx from 'clsx';
 
 interface PlayerProps {
   player: PlayerType;
@@ -32,10 +33,13 @@ const Player: FC<PlayerProps> = ({ player, isBoton, totalPlayers }) => {
         <img
           src={player.image}
           alt="Player avatar"
-          className="w-14 h-14 rounded-full border-4 border-b-gray-600"
+          className={clsx('w-14 h-14 rounded-full border-4', {
+            'border-blue-600': player.team === 'us',
+            'border-red-600': player.team === 'they',
+          })}
         />
         {isBoton && (
-          <img src={Star} className="w-6 h-6 absolute top-9 right-7" alt="Boton player" />
+          <img src={Star} className="w-6 h-6 absolute top-9 right-6" alt="Boton player" />
         )}
         <div className="flex gap-1">
           {player.hand.map((card, i) => (

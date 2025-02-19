@@ -12,7 +12,7 @@ export const createNewMatchAtom = atom(null, (_, set) => {
     status: 'waiting',
     currentGame: {
       id: '',
-      botomIndex: 1,
+      botomIndex: null,
       currentRound: 1,
       rounds: [],
       score: {
@@ -34,9 +34,11 @@ export const addPlayerAtom = atom(null, (get, set, newPlayer: Player) => {
 
   if (match.players.length >= 6) return;
 
+  const team = match.players.length % 2 === 0 ? 'us' : 'they';
+
   set(matchAtom, {
     ...match,
-    players: [...match.players, newPlayer] as ReadonlyArray<Player>,
+    players: [...match.players, { ...newPlayer, team }] as ReadonlyArray<Player>,
   });
 });
 
@@ -89,7 +91,7 @@ export const nextRoundAtom = atom(null, (get, set) => {
       gameHistory: [...match.gameHistory, game.id], // Store game ID
       currentGame: {
         id: `game-${match.gameHistory.length + 1}`,
-        botomIndex: (game.botomIndex + 1) % match.players.length, // Rotate Botom
+        botomIndex: (game.botomIndex! + 1) % match.players.length,
         currentRound: 1,
         rounds: [],
         score: { us: 0, they: 0 },
